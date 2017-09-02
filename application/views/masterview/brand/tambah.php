@@ -1,0 +1,72 @@
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Data Merek
+                        <small>(Brand)</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#">Data</a></li>
+                        <li><a href="#">Merek</a></li>
+                        <li class="active"> Tambah Merek </li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- general form elements -->
+                            <div class="box box-success">
+                                <div class="box-header">
+                                    <h3 class="box-title">Tambah Merek</h3>
+                                </div><!-- /.box-header -->
+                                <!-- form start -->
+                                <form role="form">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label>Id</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."/>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group ">
+                                            <label>Kategori Produk</label>
+                                            <select class="form-control">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                                <option>option 5</option>
+                                            </select>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group ">
+                                            <label>Kode Merek</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."/>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group ">
+                                            <label>Nama Merek</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."/>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        </div>
+                                    </div><!-- /.box-body -->
+
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        <a href="<?php echo site_url();?>/Brand_Controller/index/"  class="btn btn-warning">Batal</a>
+                                    </div>
+                                </form>
+                            </div><!-- /.box -->
+                        </div><!--/.col (left ) --> 
+                         
+                    </div>   <!-- /.row -->
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
