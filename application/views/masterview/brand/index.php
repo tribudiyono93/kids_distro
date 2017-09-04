@@ -31,15 +31,6 @@
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
-                                    <!-- <a href="<?php echo site_url();?>/Brand_controller/add" class="btn btn-info">Tambah</a> 
-                                    <p></p>
-
-                                    <div class="input-group">
-                                        <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div> -->
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>

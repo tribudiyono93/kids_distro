@@ -25,6 +25,7 @@
                                     <h3 class="box-title">Tambah Merek</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
+<<<<<<< HEAD
                                 <!-- <div class="col-md-6">
                                     
                                 </div> -->
@@ -83,10 +84,44 @@
                                                     </div>
                                                 </div>
                                             </div>
+=======
+                                <form role="form">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label>Id</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."/>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group ">
+                                            <label>Kategori Produk</label>
+                                            <select class="form-control">
+                                                <option>option 1</option>
+                                                <option>option 2</option>
+                                                <option>option 3</option>
+                                                <option>option 4</option>
+                                                <option>option 5</option>
+                                            </select>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group ">
+                                            <label>Kode Merek</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."/>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group ">
+                                            <label>Nama Merek</label>
+                                            <input type="text" class="form-control" placeholder="Enter ..."/>
+                                        </div>
+                                        <p></p>
+                                        <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+>>>>>>> b77f5adad89ba5b411ac54b1dae279801ba6e0d3
                                         </div>
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">
+<<<<<<< HEAD
                                         <div class="row">
                                             <div class="col-md-9">
 
@@ -101,6 +136,10 @@
                                                 </div>
                                             </div>
                                         </div>
+=======
+                                        <button type="submit" class="btn btn-success">Simpan</button>
+                                        <a href="<?php echo site_url();?>/Brand_Controller/index/"  class="btn btn-warning">Batal</a>
+>>>>>>> b77f5adad89ba5b411ac54b1dae279801ba6e0d3
                                     </div>
                                 </form>
                             </div><!-- /.box -->
