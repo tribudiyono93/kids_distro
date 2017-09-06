@@ -22,20 +22,30 @@
 
         <div class="form-box" id="login-box">
             <div class="header">Sign In</div>
-            <form action="../../index.html" method="post">
+            <form action="<?php echo base_url('index.php/Login_controller/authenticate'); ?>" method="post">
                 <div class="body bg-gray">
+                    <?php
+                      $error_msg = $this->session->flashdata('error_msg');
+                      if($error_msg != NULL){
+                    ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <?php echo $error_msg; ?>
+                        </div>
+                    <?php }?>
+
                     <div class="form-group">
-                        <input type="text" name="userid" class="form-control" placeholder="User ID"/>
+                        <input type="text" name="username" class="form-control" placeholder="username"/>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password"/>
+                        <input type="password" name="password" class="form-control" placeholder="password"/>
                     </div>          
                     <!-- <div class="form-group">
                         <input type="checkbox" name="remember_me"/> Remember me
                     </div> -->
                 </div>
                 <div class="footer">                                                               
-                    <button type="submit" class="btn bg-olive btn-block">Sign me in</button>  
+                    <button type="submit" class="btn bg-olive btn-block">Sign in</button>  
                     
                     <!-- <p><a href="#">I forgot my password</a></p>
                     
