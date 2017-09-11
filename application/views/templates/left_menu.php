@@ -1,4 +1,4 @@
-        <div class="wrapper row-offcanvas row-offcanvas-left">
+<div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
             <aside class="left-side sidebar-offcanvas">
                 <!-- sidebar: style can be found in sidebar.less -->
@@ -6,7 +6,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="<?php echo base_url('assets/img/avatar3.png'); ?>" class="img-circle" alt="User Image" />
+                            <img src="<?php echo base_url('assets/img/logo.jpg'); ?>" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                             <p>Hello, <?php echo $this->session->userdata('name'); ?></p>
@@ -27,10 +27,10 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="active">
-                            <a href="index.html">
+                            <a href="<?php echo base_url('index.php/Home_controller');?>">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
-                        </li>
+                        </li> 
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
@@ -38,42 +38,40 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Data 1</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Data 2</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Data 3</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-bar-chart-o"></i>
-                                <span>Barang</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Barang 1</a></li>
-                                <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Barang 2</a></li>
-                                <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Barang 3</a></li>
+                                <li><a href="<?php echo base_url('index.php/Brand_controller');?>"><i class="fa fa-angle-double-right"></i> Merek</a></li> 
+                                <li><a href="<?php echo base_url('index.php/Category_controller');?>"><i class="fa fa-angle-double-right"></i> Kategori Produk</a></li>
+                                <li><a href="<?php echo base_url('index.php/Size_controller');?>"><i class="fa fa-angle-double-right"></i> Ukuran Produk </a></li>
+                                <li><a href="<?php echo base_url('index.php/Bank_controller');?>"><i class="fa fa-angle-double-right"></i> Bank </a></li>
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-laptop"></i>
-                                <span>Penjualan</span>
+                                <span>Produk</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/UI/general.html"><i class="fa fa-angle-double-right"></i> Penjualan</a></li>
-                                <li><a href="pages/UI/icons.html"><i class="fa fa-angle-double-right"></i> Penjualan</a></li>
-                                <li><a href="pages/UI/buttons.html"><i class="fa fa-angle-double-right"></i> Penjualan</a></li>
-                                <li><a href="pages/UI/sliders.html"><i class="fa fa-angle-double-right"></i> Penjualan</a></li>
-                                <li><a href="pages/UI/timeline.html"><i class="fa fa-angle-double-right"></i> Penjualan</a></li>
+                                <li><a href="<?php echo base_url('index.php/Product_controller');?>"><i class="fa fa-angle-double-right"></i> Jenis Produk </a></li>
+                                <li><a href="<?php echo base_url('index.php/Stock_controller');?>"><i class="fa fa-angle-double-right"></i> Stok Produk</a></li>
+                                <li><a href="<?php echo base_url('index.php/Stock_controller/mumer_index');?>"><i class="fa fa-angle-double-right"></i> Stok Mumer</a></li> 
                             </ul>
                         </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-shopping-cart"></i> <span>Penjualan</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> Transaksi Penjualan</a></li>
+                                <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Rekap Penjualan</a></li> 
+                            </ul>
+                        </li> 
                         <li>
-                            <a href="index.html">
-                                <i class="fa fa-user"></i> <span>User</span>
+                            <a href="<?php echo base_url('index.php/User_controller');?>">
+                                <i class="fa fa-user"></i> <span>User</span> 
                             </a>
                         </li>
+                        
                     </ul>
                 </section>
                 <!-- /.sidebar -->
