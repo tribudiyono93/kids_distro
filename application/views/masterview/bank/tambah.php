@@ -42,7 +42,7 @@
                                                         <label>Nama Bank</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Nama bank"/>
+                                                        <input type="text" name="bank_name" class="form-control" placeholder="Nama bank"/>
                                                     </div>
                                                 </div>
                                                 <br /> <br />
@@ -51,7 +51,7 @@
                                                         <label>No. Rekening</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="No rekening"/>
+                                                        <input type="text" name="account_number" class="form-control" placeholder="No rekening"/>
                                                     </div>
                                                 </div> 
                                             </div>

@@ -31,6 +31,28 @@
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive"> 
+                                    <?php
+                                        $error_msg = $this->session->flashdata('error_msg');
+                                        $success_msg = $this->session->flashdata('success_msg');
+
+                                        if($error_msg != NULL){
+                                    ?>
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <?php echo $error_msg; ?>
+                                            </div>
+                                    <?php 
+                                        }
+
+                                        if ($success_msg != NULL) {
+
+                                    ?>
+                                            <div class="alert alert-success alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <?php echo $success_msg; ?>
+                                            </div>
+                                    <?php }?>
+
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -41,26 +63,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center" >1</td>
-                                                <td>BRI</td>
-                                                <td class="text-center">123-456-132-132</td> 
-                                                <td class="text-center">
-                                                    <a href="<?php echo site_url();?>index.php/Bank_controller/edit" class="btn bg-purple margin" type='button'><i class='fa fa-edit'></i> Ubah </a> 
-                                                    <a href="" onclick="return confirm('Apakah anda yakin data akan di hapus?');" class="btn bg-orange margin" type='button'><i class='fa fa-eraser'></i> Hapus </a> 
-                                                </td>
-                                            </tr> 
+                                            <?php
+                                                $i = 1;
+                                                foreach ($banks as $value) {
+                                                   
+                                            ?>
+                                                <tr>
+                                                    <td class="text-center" ><?php echo $i;?></td>
+                                                    <td><?php echo $value['bank_name'];?></td>
+                                                    <td class="text-center"><?php echo $value['account_number'];?></td> 
+                                                    <td class="text-center">
+                                                        <a href="<?php echo site_url('index.php/Bank_controller/edit/'.$value['id_bank']);?>" class="btn bg-purple margin" type='button'><i class='fa fa-edit'></i> Ubah </a> 
+                                                        <a href="<?php echo site_url('index.php/Bank_controller/delete/'.$value['id_bank']);?>" onclick="return confirm('Apakah anda yakin data akan di hapus?');" class="btn bg-orange margin" type='button'><i class='fa fa-eraser'></i> Hapus </a> 
+                                                    </td>
+                                                </tr> 
+
+                                            <?php $i++; } ?>
                                         </tbody>
                                     </table>
                                 </div><!-- /.box-body -->
                                 <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
+                                    <?php echo $pagination; ?>
                                 </div>
                             </div><!-- /.box -->
                         </div>
