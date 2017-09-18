@@ -22,12 +22,14 @@
                                  <div class="box-header">
                                     <h3 class="box-title">Tabel Data Bank</h3>
                                     <div class="box-tools">
-                                        <div class="input-group">
-                                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                        <form role="form" action="<?php echo base_url('index.php/Bank_controller/search');?>" method="POST">
+                                            <div class="input-group">
+                                                <input type="text" name="keyword" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive"> 
@@ -64,12 +66,12 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                                $i = 1;
+                                                $i = 0;
                                                 foreach ($banks as $value) {
-                                                   
+                                                   $i++;
                                             ?>
                                                 <tr>
-                                                    <td class="text-center" ><?php echo $i;?></td>
+                                                    <td class="text-center" ><?php echo ($page+$i);?></td>
                                                     <td><?php echo $value['bank_name'];?></td>
                                                     <td class="text-center"><?php echo $value['account_number'];?></td> 
                                                     <td class="text-center">
@@ -78,7 +80,7 @@
                                                     </td>
                                                 </tr> 
 
-                                            <?php $i++; } ?>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div><!-- /.box-body -->

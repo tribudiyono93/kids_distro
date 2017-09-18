@@ -132,6 +132,19 @@ class Bank_controller extends MY_Controller {
 		}
 	}
 
+	public function search() {
+		$keyword = $this->input->post('keyword');
+
+		//load database
+		$this->load->database();
+		//load Bank_model
+		$this->load->model('Bank_model');
+
+		$data['banks'] = $this->Bank_model->search($keyword);
+
+		$this->views('bank/cari', $data);
+	}
+
 }
 
 /* End of file Bank_controller.php */

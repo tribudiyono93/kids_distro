@@ -36,5 +36,11 @@ class Bank_model extends CI_Model {
 		$this->db->where('id_bank', $id_bank);
 		return $this->db->update('banks', $data);
 	}
+
+	public function search($keyword) {
+		$sql 		= "select id_bank, bank_name, account_number from banks where bank_name like '" .$keyword. "%' order by creation_time desc ";
+		$query 		= $this->db->query($sql);
+		return $query->result_array();
+	}
 }
 ?>
