@@ -65,7 +65,7 @@ class User_controller extends MY_Controller {
 		$this->load->database();
 		//load Bank_model
 		$this->load->model('User_model');
-			
+
 		$user = $this->User_model->get_user_by_id($data['username']);
 
 		if (count($user) >= 1) {
@@ -120,6 +120,19 @@ class User_controller extends MY_Controller {
 			$this->session->set_flashdata('error_msg', 'Failed update data');
 			redirect('index.php/User_controller');
 		}
+	}
+
+	public function search() {
+		$keyword = $this->input->post('keyword');
+
+		//load database
+		$this->load->database();
+		//load Bank_model
+		$this->load->model('User_model');
+
+		$data['users'] = $this->User_model->search($keyword);
+
+		$this->views('user/cari', $data);
 	}
 }
 

@@ -34,7 +34,7 @@ class User_model extends CI_Model {
 	}
 
 	public function search($keyword) {
-		$sql 		= "select username, name, address, phone_number from users where name like '" .$keyword. "%' order by creation_time desc ";
+		$sql 		= "select username, name, address, phone_number from users where lower(name) like '" .$keyword. "%' order by creation_time desc ";
 		$query 		= $this->db->query($sql);
 		return $query->result_array();
 	}
