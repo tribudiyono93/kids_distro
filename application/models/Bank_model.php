@@ -3,6 +3,7 @@
 * 
 */
 class Bank_model extends CI_Model {
+	
 	public  function save($data) {
 		return $this->db->insert('banks', $data);
 	}

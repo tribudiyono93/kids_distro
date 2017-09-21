@@ -28,15 +28,6 @@
                                     <div class="box-body">
                                         <div class="row">
                                             <div class="col-md-9">
-                                                <!-- <div class="form-group">
-                                                    <div class="col-md-3">
-                                                        <label>Id Bank</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Enter ..."/>
-                                                    </div>
-                                                </div> 
-                                                <br /> <br /> -->
                                                 <div class="form-group ">
                                                     <div class="col-md-3">
                                                         <label>Nama Bank</label>
