@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Bank_controller extends MY_Controller {
+class Size_controller extends MY_Controller {
 
 	public function __construct()
 	{
@@ -9,21 +9,16 @@ class Bank_controller extends MY_Controller {
 		if($this->session->userdata('login_status') == FALSE){
 			redirect();
 		}
+
+		$this->load->model('Size_model');
 		 
 	}
 
 	public function index()
-	{	
-		//load database
-		$this->load->database();
-		//load Bank_model
-		$this->load->model('Bank_model');
-		//load pagination
-		$this->load->library('pagination');
-
-		$config['base_url']			= base_url('index.php/Bank_controller/index');
-		$config['total_rows']		= $this->Bank_model->get_total_rows();
-		$config['per_page']			= 2;
+	{
+		$config['base_url']			= base_url('index.php/Size_controller/index');
+		$config['total_rows']		= $this->Size_model->get_total_rows();
+		$config['per_page']			= 5;
 		$config["uri_segment"] 		= 3;
         $choice 					= $config["total_rows"] / $config["per_page"];
         $config["num_links"] 		= floor($choice);
@@ -41,114 +36,81 @@ class Bank_controller extends MY_Controller {
         $config['cur_tag_close'] 	= '</a></li>';
         $config['num_tag_open'] 	= '<li>';
         $config['num_tag_close'] 	= '</li>';
-
         $this->pagination->initialize($config);
         $data['page'] 				= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data['pagination']			= $this->pagination->create_links();
-		$data['banks']			= $this->Bank_model->get_banks($config["per_page"], $data['page']);
-
-		$this->views('bank/index', $data);	
+		$data['sizes']			= $this->Size_model->get_sizes($config["per_page"], $data['page']);
+		$this->views('size/index',$data);
 	}
 
-	public function add( )
+	public function add()
 	{
-		$this->views('bank/tambah');
+		$this->views('size/tambah');
 	}
 
 	public function save() {
 		//get all data
-		$data['bank_name'] 			= $this->input->post('bank_name');
-		$data['account_number'] 	= $this->input->post('account_number');
+		$data['size_type'] 			= $this->input->post('size_type');
+		$data['information'] 		= $this->input->post('information');
 		$data['creation_time']		= date("Y-m-d H:i:s");
 		$data['created_by']			= $this->session->userdata('username');
 		$data['updated_time']		= date("Y-m-d H:i:s");
 		$data['updated_by']			= $this->session->userdata('username');
-
-		//load database
-		$this->load->database();
-		//load Product_model
-		$this->load->model('Bank_model');
-
-		$is_success = $this->Bank_model->save($data);
-
+		 
+		$is_success = $this->Size_model->save($data);
 		if ($is_success) {
 			$this->session->set_flashdata('success_msg', 'Success Insert Data');
-			redirect('index.php/Bank_controller');
+			redirect('index.php/Size_controller');
 		} else {
 			$this->session->set_flashdata('error_msg', 'Failed Insert Data');
-			redirect('index.php/Bank_controller');
+			redirect('index.php/Size_controller');
 		}
-
 	}
 
-	public function edit($id_bank)
+	public function edit($id_size)
 	{
-		//load database
-		$this->load->database();
-		//load Product_model
-		$this->load->model('Bank_model');
-
-		$data['bank'] = $this->Bank_model->get_bank_by_id($id_bank);
-
-		$this->views('bank/ubah', $data);
+		$data['size'] = $this->Size_model->get_size_by_id($id_size);
+		$this->views('size/ubah',$data);
 	}
 
-	public function update() {
-		
-		//load database
-		$this->load->database();
-		//load Product_model
-		$this->load->model('Bank_model');
-
+	public function update() 
+	{
 		//get all data
-		$id_bank					= $this->input->post('id_bank');
-		$data['bank_name'] 			= $this->input->post('bank_name');
-		$data['account_number'] 	= $this->input->post('account_number');
+		$id_size					= $this->input->post('id_size');
+		$data['size_type'] 			= $this->input->post('size_type');
+		$data['information'] 		= $this->input->post('information');
 		$data['updated_time']		= date("Y-m-d H:i:s");
 		$data['updated_by']			= $this->session->userdata('username');
-
-		$is_success = $this->Bank_model->update($id_bank, $data);
-
+		$is_success = $this->Size_model->update($id_size, $data);
 		if ($is_success) {
 			$this->session->set_flashdata('success_msg', 'Success update data');
-			redirect('index.php/Bank_controller');
+			redirect('index.php/Size_controller');
 		} else {
 			$this->session->set_flashdata('error_msg', 'Failed update data');
-			redirect('index.php/Bank_controller');
+			redirect('index.php/Size_controller');
 		}
 	}
 
-	public function delete($id_bank) {
-		//load database
-		$this->load->database();
-		//load Bank_model
-		$this->load->model('Bank_model');
-		
-		$is_success = $this->Bank_model->delete($id_bank);
-
+	public function delete($id_size) 
+	{		
+		$is_success = $this->Size_model->delete($id_size);
 		if ($is_success) {
 			$this->session->set_flashdata('success_msg', 'Success delete data');
-			redirect('index.php/Bank_controller');
+			redirect('index.php/Size_controller');
 		} else {
 			$this->session->set_flashdata('error_msg', 'Failed delete data');
-			redirect('index.php/Bank_controller');
+			redirect('index.php/Size_controller');
 		}
 	}
 
-	public function search() {
+	public function search() 
+	{
 		$keyword = $this->input->post('keyword');
-
-		//load database
-		$this->load->database();
-		//load Bank_model
-		$this->load->model('Bank_model');
-
-		$data['banks'] = $this->Bank_model->search($keyword);
-
-		$this->views('bank/cari', $data);
+		
+		$data['sizes'] = $this->Size_model->search($keyword);
+		$this->views('size/cari', $data);
 	}
-
 }
 
-/* End of file Bank_controller.php */
-/* Location: ./application/controllers/Bank_controller.php */
+/* End of file Size_controller.php */
+/* Location: ./application/controllers/Size_controller.php */

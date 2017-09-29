@@ -72,7 +72,7 @@
                                                    $i++;
                                             ?>
                                             <tr>
-                                                <td><?php echo ($page+$i);?></td>
+                                                <td><?php echo $i;?></td>
                                                 <td><?php echo $value['id_brand'];?></td>
                                                 <td><?php echo $value['brand_name'];?></td>
                                                 <td><?php echo $value['description'];?></td>
@@ -85,7 +85,7 @@
                                     </table>
                                 </div><!-- /.box-body -->
                                 <div class="box-footer clearfix">
-                                    <?php echo $pagination; ?>
+                                    
                                 </div>
                             </div><!-- /.box -->
                         </div>

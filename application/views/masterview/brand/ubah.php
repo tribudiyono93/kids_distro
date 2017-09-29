@@ -25,43 +25,48 @@
                                     <h3 class="box-title">Ubah Merek</h3>
                                 </div><!-- /.box-header -->
                                 <!-- form start -->
-                                <form role="form">
+                                <form role="form" action="<?php echo base_url('index.php/Brand_controller/update');?>" method="POST">
                                     <div class="box-body">
-                                        <div class="form-group">
-                                            <label>Id</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..."/>
-                                        </div>
-                                        <p></p>
-                                        <div class="form-group ">
-                                            <label>Kategori Produk</label>
-                                            <select class="form-control">
-                                                <option>option 1</option>
-                                                <option>option 2</option>
-                                                <option>option 3</option>
-                                                <option>option 4</option>
-                                                <option>option 5</option>
-                                            </select>
-                                        </div>
-                                        <p></p>
-                                        <div class="form-group ">
-                                            <label>Kode Merek</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..."/>
-                                        </div>
-                                        <p></p>
-                                        <div class="form-group ">
-                                            <label>Nama Merek</label>
-                                            <input type="text" class="form-control" placeholder="Enter ..."/>
-                                        </div>
-                                        <p></p>
-                                        <div class="form-group">
-                                            <label>Keterangan</label>
-                                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group ">
+                                                    <div class="col-md-3">
+                                                        <label>Brand Name</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="hidden" name="id_brand" value="<?php echo $brand['id_brand'];?>" class="form-control" placeholder="ID Brand"/>
+                                                        <input type="text" name="brand_name" value="<?php echo $brand['brand_name'];?>" class="form-control" placeholder="Brand Name"/>
+                                                    </div>
+                                                </div>
+                                                <br /> <br />
+                                                <div class="form-group ">
+                                                    <div class="col-md-3">
+                                                        <label>Descriptions</label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <textarea class="form-control" name="description" rows="4" placeholder="Descriptions"><?php echo $brand['description'];?></textarea>
+                                                    </div>
+                                                </div>
+                                                <br /> <br />
+                                            </div>
                                         </div>
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">
-                                        <button type="submit" class="btn btn-success">Ubah</button>
-                                        <a href="<?php echo site_url();?>/Brand_Controller/index/"  class="btn btn-warning">Batal</a>
+                                        <div class="row">
+                                            <div class="col-md-9">
+
+                                                <div class="col-md-3">
+                                                    
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <button type="submit" class="btn btn-success pull-left" style="margin-right: 5px;">Simpan</button>
+
+                                                    <a href="<?php echo site_url();?>/Brand_Controller/index/"  class="btn btn-warning pull-left">Batal</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div><!-- /.box -->
