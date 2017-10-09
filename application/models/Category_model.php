@@ -23,6 +23,13 @@ class Category_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_all_category()
+	{
+		$sql 		= "select id_product_category, product_category_name, description from product_categories order by creation_time desc";
+		$query 		= $this->db->query($sql); 
+		return $query->result_array();
+	}
+
 	public function delete($id_product_category)
 	{
 		$this->db->where('id_product_category', $id_product_category);

@@ -26,46 +26,60 @@
                                 </div><!-- /.box-header -->
                                 
                                 <!-- form start -->
-                                <form role="form">
+                                <form role="form" action="<?php echo base_url('index.php/product_controller/store');?>" method="POST" enctype="multipart/form-data">
                                     <div class="box-body">
                                         <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <div class="col-md-3">
                                                         <label>Id Produk</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                                                        <input type="text" name="id_product" value="<?php echo $product_code;?>" readonly="readonly" class="form-control" placeholder="Enter ..."/>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
                                                     </div>
                                                 </div>
                                                 <br /> <br />
                                                 <div class="form-group">
                                                     <div class="col-md-3">
-                                                        <label>Id | Kategori</label>
+                                                        <label>Kategori</label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>option 1</option>
-                                                            <option>option 2</option>
-                                                            <option>option 3</option>
-                                                            <option>option 4</option>
-                                                            <option>option 5</option>
+                                                        <select name="id_product_category" class="form-control">
+                                                            <?php foreach($categories as $row) {?>
+                                                                <option value="<?php echo $row['id_product_category'];?>"><?php echo $row['product_category_name'];?></option>
+                                                            <?php } ?>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
                                                     </div>
                                                 </div>  
                                                 <br /> <br />
                                                 <div class="form-group">
                                                     <div class="col-md-3">
-                                                        <label>Id | Merek</label>
+                                                        <label>Merek</label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <select class="form-control">
-                                                            <option>option 1</option>
-                                                            <option>option 2</option>
-                                                            <option>option 3</option>
-                                                            <option>option 4</option>
-                                                            <option>option 5</option>
+                                                        <select name="id_brand" class="form-control">
+                                                            <?php foreach($brands as $row) {?>
+                                                                <option value="<?php echo $row['id_brand'];?>"><?php echo $row['brand_name'];?></option>
+                                                            <?php } ?>
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
                                                     </div>
                                                 </div>
                                                 <br /> <br />
@@ -74,7 +88,13 @@
                                                         <label>Nama Produk</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                                                        <input name="product_name" required="required" type="text" class="form-control" placeholder="product name"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
                                                     </div>
                                                 </div>
                                                 <br /> <br />
@@ -83,7 +103,13 @@
                                                         <label>Warna</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                                                        <input name="color" required="required" type="text" class="form-control" placeholder="product color"/>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
                                                     </div>
                                                 </div>
                                                 <br /> <br />
@@ -92,7 +118,13 @@
                                                         <label for="exampleInputFile">File Gambar</label> 
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="file" id="exampleInputFile">
+                                                        <input type="file" name="image">
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
                                                     </div>
                                                 </div>
                                                 <br /> <br />
@@ -101,8 +133,63 @@
                                                         <label>Keterangan</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                                        <textarea class="form-control" name="information" rows="3" placeholder="Enter ...">-</textarea>
                                                     </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <br /> <br />
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a class="btn btn-sm btn-primary" id="add_field_button">Add More Fields</a>    
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                    </div>
+                                                    <div class="col-md-1">
+
+                                                    </div>
+                                                </div>
+                                                <br /> <br />
+                                                <div id="input_fields_wrap">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3">
+                                                            <label>Stok</label>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select name="id_size[]" class="form-control">
+                                                                <?php foreach($sizes as $row) {?>
+                                                                    <option value="<?php echo $row['id_size'];?>"><?php echo $row['size_type'];?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input name="stock_product[]" required="required" type="number" value="1" class="form-control" min="1" placeholder="stok"/>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input name="price[]" required="required" type="number" class="form-control" placeholder="price"/>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <select name="status[]" class="form-control">
+                                                                <option value="true">sale</option>
+                                                                <option value="false">tidak sale</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-1">
+
+                                                        </div>
+                                                    </div>
+                                                    <br/>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,7 +197,7 @@
 
                                     <div class="box-footer">
                                         <div class="row">
-                                            <div class="col-md-9">
+                                            <div class="col-md-12">
 
                                                 <div class="col-md-3">
                                                     
@@ -121,6 +208,12 @@
 
                                                     <a href="<?php echo site_url();?>index.php/Product_Controller/index/"  class="btn btn-warning pull-left">Batal</a>
                                                 </div>
+                                                <div class="col-md-2">
+
+                                                    </div>
+                                                <div class="col-md-1">
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -130,4 +223,27 @@
                          
                     </div>   <!-- /.row -->
                 </section><!-- /.content -->
-            </aside><!-- /.right-side -->
+            </aside><!-- /.right-side --> 
+
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    var wrapper         = $('#input_fields_wrap'); //Fields wrapper
+                    var add_button      = $('#add_field_button'); //Add button ID
+                    
+                    var x = 1; //initlal text box count
+                    $(add_button).click(function(e){ //on add input button click
+                        e.preventDefault();
+                        $.ajax({
+                            url: "get_new_input_form",
+                            cache: false,
+                            success: function(data) {
+                                $(wrapper).append(data);
+                            }
+                        });
+                    });
+                    
+                    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                        e.preventDefault(); $(this).parent().parent().parent().remove(); x--;
+                    })
+                });
+            </script> 

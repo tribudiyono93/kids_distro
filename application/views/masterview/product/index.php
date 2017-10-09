@@ -31,6 +31,27 @@
                                     </div>
                                 </div><!-- /.box-header --> 
                                 <div class="box-body table-responsive">
+                                    <?php
+                                        $error_msg = $this->session->flashdata('error_msg');
+                                        $success_msg = $this->session->flashdata('success_msg');
+
+                                        if($error_msg != NULL){
+                                    ?>
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <?php echo $error_msg; ?>
+                                            </div>
+                                    <?php 
+                                        }
+
+                                        if ($success_msg != NULL) {
+
+                                    ?>
+                                            <div class="alert alert-success alert-dismissable">
+                                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                <?php echo $success_msg; ?>
+                                            </div>
+                                    <?php }?>
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>

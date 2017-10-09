@@ -15,6 +15,12 @@ class Brand_model extends CI_Model {
 		return $query->num_rows();
 	}
 
+	public function get_all_brand() {
+		$sql 		= "select id_brand, brand_name, description from brands order by creation_time desc";
+		$query 		= $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	public function get_brands($limit, $offset)
 	{
 		$sql 		= "select id_brand, brand_name, description from brands order by creation_time desc limit " . $limit. " 

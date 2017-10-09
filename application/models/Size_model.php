@@ -15,6 +15,13 @@ class Size_model extends CI_Model {
 		return $query->num_rows();
 	}
 
+	public function get_all_size()
+	{
+		$sql 		= "select id_size, size_type, information from sizes order by id_size asc";
+		$query 		= $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	public function get_sizes($limit, $offset)
 	{
 		$sql 		= "select id_size, size_type, information from sizes order by id_size asc limit " . $limit. " 
