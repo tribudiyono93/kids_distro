@@ -33,37 +33,27 @@
                     </div><!-- /.row --> 
                     <p></p><p></p>
                     <!-- box open -->
+                    
                     <div class="box col-md-12">  
                         <div class="timeline-item"> 
                             <h3 class="timeline-header text-center"><a href="<?php echo base_url('index.php/Stock_controller');?>">Stok Produk Terbaru</a></h3>
                                 <div class="timeline-body">
+                                <?php 
+                                 foreach ($home_product as $row) 
+                                {?>
                                     <div class="col-md-3"> 
                                         <div class="box-box-solid">
-                                            <div class="box box-header">  <p class="text-center"><strong>Viggo Kido</strong></p> </div>
-                                             <img src="<?php echo base_url('assets/img/avatar6.png');?>" width="200px" height="150px" class='margin'>   
+                                            <div class="box box-header">  
+                                                <p class="text-center"><strong><?php echo $row->id_brand;?> - <?php echo $row->product_name;?></strong></p>
+                                            </div>
+                                             <img style="width: 100%; display: block;" src="<?php echo base_url('assets/img/product/'.$row->image);?>" width="200px" height="150px" alt="image" class='margin'/>
                                         </div> 
                                     </div> 
-                                    <div class="col-md-3"> 
-                                        <div class="box-box-solid">
-                                            <div class="box box-header">  <p class="text-center"><strong>Viggo Kido</strong></p> </div>
-                                             <img src="<?php echo base_url('assets/img/avatar6.png');?>" width="200px" height="150px" class='margin'>   
-                                        </div> 
-                                    </div> 
-                                    <div class="col-md-3"> 
-                                        <div class="box-box-solid">
-                                            <div class="box box-header">  <p class="text-center"><strong>Viggo Kido</strong></p> </div>
-                                             <img src="<?php echo base_url('assets/img/avatar6.png');?>" width="200px" height="150px" class='margin'>   
-                                        </div> 
-                                    </div> 
-                                    <div class="col-md-3"> 
-                                        <div class="box-box-solid">
-                                            <div class="box box-header">  <p class="text-center"><strong>Viggo Kido</strong></p> </div>
-                                             <img src="<?php echo base_url('assets/img/avatar6.png');?>" width="200px" height="150px" class='margin'>   
-                                        </div> 
-                                    </div> 
+                                <?php    }?>      
                                 </div>
                         </div> 
                     </div>
+                     
                     <!-- box close -->
                     <!-- top row -->
                     <div class="row">

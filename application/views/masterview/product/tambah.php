@@ -181,8 +181,8 @@
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <select name="status[]" class="form-control">
-                                                                <option value="true">sale</option>
-                                                                <option value="false">tidak sale</option>
+                                                                <option value="Stok Promo">Stok Promo</option>
+                                                                <option value="Stok Baru">Stok Baru</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-1">
@@ -246,4 +246,4 @@
                         e.preventDefault(); $(this).parent().parent().parent().remove(); x--;
                     })
                 });
-            </script> 
+            </script>

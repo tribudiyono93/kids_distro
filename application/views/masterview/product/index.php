@@ -17,24 +17,25 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-xs-12">
-                            <a href="<?php echo site_url();?>index.php/Product_controller/add" class="btn btn-info">Tambah</a> 
+                            <a href="<?php echo site_url();?>index.php/Product_controller/add" class="btn btn-info"><i class='fa fa-plus'></i> Tambah</a> 
                             <div class="box" style="margin-top: 10px"> 
                                 <div class="box-header">
                                     <h3 class="box-title">Tabel Jenis Produk</h3>
                                     <div class="box-tools">
-                                        <div class="input-group">
-                                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                        <form role="form" action="<?php echo base_url('index.php/Product_controller/search');?>" method="POST">
+                                            <div class="input-group">
+                                                <input type="text" name="keyword" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div><!-- /.box-header --> 
                                 <div class="box-body table-responsive">
                                     <?php
                                         $error_msg = $this->session->flashdata('error_msg');
                                         $success_msg = $this->session->flashdata('success_msg');
-
                                         if($error_msg != NULL){
                                     ?>
                                             <div class="alert alert-danger alert-dismissable">
@@ -43,59 +44,58 @@
                                             </div>
                                     <?php 
                                         }
-
                                         if ($success_msg != NULL) {
-
                                     ?>
                                             <div class="alert alert-success alert-dismissable">
                                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                                 <?php echo $success_msg; ?>
                                             </div>
                                     <?php }?>
+
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">No</th>
                                                 <th class="text-center">Nama Produk</th>
-                                                <th class="text-center">Kategori</th>
-                                                <th class="text-center">Merek</th>
-                                                <th class="text-center">Warna</th>
-                                                <th class="text-center">Gambar</th>
-                                                <th class="text-center">Keterangan</th> 
+                                                <th class="text-center">Image</th>
+                                                <th class="text-center">Size</th>
+                                                <th class="text-center">Stok</th>
+                                                <th class="text-center">price</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-center">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                                $i = 1;
+                                                foreach ($products as $value) {
+                                                   
+                                            ?>
                                             <tr>
-                                                <td class="text-center">1</td>
-                                                <td>Lengan Panjang</td>
-                                                <td>Baju Anak Cewek</td>
-                                                <td>JOHN CARTER</td>
-                                                <td>Merah </td>
-                                                <td class="text-center">
-                                                    <img src="<?php echo base_url('assets/img/avatar6.png');?>" width="80px" height="80px">
+                                                <td class="text-center"><?php echo ($page+$i);?></td>
+                                                <td><?php echo $value['product_name'];?></td>
+                                                <td class="text-center"> 
+                                                    <img src="<?php echo base_url('assets/img/product/'.$value['image']);?>" width="80px" height="80px">
                                                 </td>
-                                                <td>Kain Halus</td>
+                                                <td><?php echo $value['size_type'];?></td>
+                                                <td><?php echo $value['stock_product'];?></td>
+                                                <td><?php echo $value['price'];?></td>
+                                                
+                                                <td><?php echo $value['status'];?></td> 
                                                 <td class="text-center">
-                                                    <a href="<?php echo site_url();?>index.php/Product_controller/edit" class="btn bg-maroon margin" type='button'><i class='fa fa-edit'></i> Ubah </a> 
-                                                    <a href="" onclick="return confirm('Apakah anda yakin data akan di hapus?');" class="btn bg-orange margin" type='button'><i class='fa fa-eraser'></i> Hapus </a> 
+                                                    <a href="<?php echo site_url();?>index.php/Product_controller/detail/<?php echo $value['id_product'];?>/<?php echo $value['id_detail_product'];?>" class="btn bg-navy margin" type='button'><i class="fa fa-th"> Detail</i></a> 
+                                                    <a href="<?php echo site_url();?>index.php/Product_controller/edit/<?php echo $value['id_product'];?>/<?php echo $value['id_detail_product'];?>" class="btn bg-purple margin" type='button'><i class='fa fa-edit'></i> Ubah </a>   
                                                 </td>
-                                            </tr>  
+                                            </tr> 
+                                            <?php $i++; } ?>  
                                         </tbody>
                                     </table>
                                 </div><!-- /.box-body -->
                                 <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                    </ul>
+                                    <?php echo $pagination; ?>
                                 </div>
                             </div><!-- /.box -->
                         </div>
-                    </div>
-
+                    </div> 
                 </section><!-- /.content -->
             </aside><!-- /.right-side --> 

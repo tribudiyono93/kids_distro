@@ -6,19 +6,19 @@ class Home_controller extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if($this->session->userdata('login_status') == FALSE){
-			redirect();
+		if($this->session->userdata('login_status') == FALSE)
+		{
+ 			redirect();
 		}
-		//Load Dependencies
-		//buat ga balik
-		// if (empty($this->session->userdata('id'))) {
-
-		// 	redirect('Login');
-		// }
+		
+		$this->load->model('Home_model');
 	}
+	
 	public function index()
 	{
-		$this->views('home/index');
+
+		$data['home_product'] = $this->Home_model->dtImage();
+		$this->views('home/index',$data);
 		// $this->load->view('templates/header');
 		// $this->load->view('templates/left_menu');
 		// $this->load->view('masterview/home/index');
