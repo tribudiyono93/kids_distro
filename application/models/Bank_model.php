@@ -21,6 +21,12 @@ class Bank_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_all_banks(){
+		$sql 		= "select id_bank, bank_name, account_number from banks order by creation_time desc";
+		$query 		= $this->db->query($sql);
+		return $query->result_array();
+	}
+
 	public function delete($id_bank){
 		$this->db->where('id_bank', $id_bank);
 		return $this->db->delete('banks');

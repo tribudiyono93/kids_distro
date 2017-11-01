@@ -3,13 +3,13 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Penjualan
-                        <small>(Sale)</small>
+                        Rekap Penjualan
+                        <small>(Sales History)</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <!-- <li><a href="#">Tables</a></li> -->
-                        <li class="active">Data Penjualan</li>
+                        <li class="active">Rekap Penjualan</li>
                     </ol>
                 </section>
 
@@ -20,7 +20,7 @@
                             <!-- <a href="<?php echo site_url();?>index.php/User_controller/add" class="btn btn-info">Tambah</a>  -->
                             <div class="box" style="margin-top: 10px">
                                 <div class="box-header">
-                                    <h3 class="box-title">Data Penjualan</h3>
+                                    <h3 class="box-title">Rekap Data Penjualan</h3>
                                     <div class="box-tools">
                                         <div class="input-group">
                                             <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
@@ -57,7 +57,8 @@
                                                 <th class="text-center">No Transaksi [J]</th>
                                                 <th class="text-center">Customer</th>
                                                 <th class="text-center">Alamat</th>
-                                                <th class="text-center">Total Harga</th>
+                                                <th class="text-center">Bank</th>
+                                                <th class="text-center">Total Bayar</th>
                                                 <th class="text-center">Pembayaran</th>
                                                 <th class="text-center">Status</th>
                                                 <th class="text-center">Aksi</th>
@@ -69,6 +70,15 @@
                                                 <td>SALE180920170001</td>
                                                 <td>Siska</td>
                                                 <td>Jakal km 9</td>
+                                                <td>
+                                                    <div class="form-group"> 
+                                                        <select class="form-control">
+                                                            <option>BRI</option>
+                                                            <option>BNI</option> 
+                                                            <option>BCA</option> 
+                                                        </select>
+                                                    </div>
+                                                </td>
                                                 <td>Rp 100.000,00</td>
                                                 <td>
                                                     <div class="form-group"> 

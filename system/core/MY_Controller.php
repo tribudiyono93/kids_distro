@@ -30,6 +30,14 @@ class MY_Controller extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 	}
+
+	public function view($file, $data = array()) {
+		if (count($data != 0)){
+			$this->load->view('masterview/' . $file, $data);
+		} else {
+			$this->load->view('masterview/' . $file );
+		}
+	}
 }
 /* End of file MY_Controller.php */
 /* Location: .//C/xampp/htdocs/kids_distro/system/core/MY_Controller.php */

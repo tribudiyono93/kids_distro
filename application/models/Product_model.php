@@ -63,6 +63,13 @@ class Product_model extends CI_Model {
 		return $data;
 	}
 
+	public function get_detail_product_by_id_product($id_product) 
+	{ 
+		$query = $this->db->query("select pd.*, s.* from product_details pd, sizes s where pd.id_size = s.id_size and pd.id_product = '$id_product' ORDER BY pd.creation_time DESC"); 
+		$data = $query->result_array(); 
+		return $data;
+	}
+
 	public function search($keyword) 
 	{
 		$sql 		= "select p.id_product, p.product_name, p.id_brand, p.product_name, p.color, p.information, p.image, pc.product_category_name from products p join product_categories pc where p.id_product_category = pc.id_product_category and lower (p.product_name) like '" .$keyword. "%' order by p.creation_time desc ";
@@ -75,10 +82,22 @@ class Product_model extends CI_Model {
 		return $this->db->update('products', $product_data);
 	}
 
+	public function update_status_by_id($id_product, $id_detail_product, $data) {
+		$this->db->where('id_detail_product', $id_detail_product);
+		$this->db->where('id_product', $id_product);
+		return $this->db->update('product_details', $data);
+	}
+
 	public function update_detail_product_data($id_product, $id_detail_product, $detail_product_data) {
 		$this->db->where('id_product', $id_product);
 		$this->db->where('id_detail_product', $id_detail_product);
 		return $this->db->update('product_details', $detail_product_data);
+	}
+
+	public function get_just_product() {
+		$sql 		= "select * from products";
+		$query 		= $this->db->query($sql);
+		return $query->result_array();
 	}
 
 }

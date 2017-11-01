@@ -55,8 +55,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="<?php echo base_url('index.php/Sale_controller');?>"><i class="fa fa-angle-double-right"></i> Transaksi Penjualan</a></li>
-                                <li><a href="<?php echo base_url('index.php/Sale_controller/rekap_index');?>"><i class="fa fa-angle-double-right"></i> Rekap Penjualan</a></li> 
+                                <li><a href="<?php echo base_url('index.php/Sale_controller/add');?>"><i class="fa fa-angle-double-right"></i> Transaksi Penjualan</a></li>
+                                <li><a href="<?php echo base_url('index.php/Sale_controller');?>"><i class="fa fa-angle-double-right"></i> Rekap Penjualan</a></li> 
                             </ul>
                         </li> 
                         <li>

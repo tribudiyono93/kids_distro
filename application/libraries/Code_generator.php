@@ -13,5 +13,10 @@
 
 	        return implode($pass).$date;
 		}
+
+		public function get_transaction_code() {
+			$date = date('His');
+			return "SALE".$this->get_product_code().$date;
+		}
 	}
 ?>

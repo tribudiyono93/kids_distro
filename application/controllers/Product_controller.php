@@ -200,6 +200,22 @@ class Product_controller extends MY_Controller {
 		$this->views('product/cari', $data);
 	}
 
+	public function update_status_product() {
+
+		$id_product 					= $this->input->post('id_product');
+		$id_detail_product 				= $this->input->post('id_detail_product');
+		$data['status'] 					= $this->input->post('value');
+		$data['updated_time']			= date("Y-m-d H:i:s");
+		$data['updated_by']				= $this->session->userdata('username');
+
+
+		$status = $this->p->update_status_by_id($id_product, $id_detail_product, $data);
+
+		if ($status) {
+			echo $this->session->userdata('previous_url');
+		}
+	}
+
 	
 }
 /* End of file Product_controller.php */

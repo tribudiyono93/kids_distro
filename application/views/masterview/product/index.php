@@ -52,44 +52,53 @@
                                             </div>
                                     <?php }?>
 
-                                    <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">No</th>
-                                                <th class="text-center">Nama Produk</th>
-                                                <th class="text-center">Image</th>
-                                                <th class="text-center">Size</th>
-                                                <th class="text-center">Stok</th>
-                                                <th class="text-center">price</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                                $i = 1;
-                                                foreach ($products as $value) {
-                                                   
-                                            ?>
-                                            <tr>
-                                                <td class="text-center"><?php echo ($page+$i);?></td>
-                                                <td><?php echo $value['product_name'];?></td>
-                                                <td class="text-center"> 
-                                                    <img src="<?php echo base_url('assets/img/product/'.$value['image']);?>" width="80px" height="80px">
-                                                </td>
-                                                <td><?php echo $value['size_type'];?></td>
-                                                <td><?php echo $value['stock_product'];?></td>
-                                                <td><?php echo $value['price'];?></td>
-                                                
-                                                <td><?php echo $value['status'];?></td> 
-                                                <td class="text-center">
-                                                    <a href="<?php echo site_url();?>index.php/Product_controller/detail/<?php echo $value['id_product'];?>/<?php echo $value['id_detail_product'];?>" class="btn bg-navy margin" type='button'><i class="fa fa-th"> Detail</i></a> 
-                                                    <a href="<?php echo site_url();?>index.php/Product_controller/edit/<?php echo $value['id_product'];?>/<?php echo $value['id_detail_product'];?>" class="btn bg-purple margin" type='button'><i class='fa fa-edit'></i> Ubah </a>   
-                                                </td>
-                                            </tr> 
-                                            <?php $i++; } ?>  
-                                        </tbody>
-                                    </table>
+                                    <div id="product-container">
+                                        <table id="example1" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">Nama Produk</th>
+                                                    <th class="text-center">Image</th>
+                                                    <th class="text-center">Size</th>
+                                                    <th class="text-center">Stok</th>
+                                                    <th class="text-center">price</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                    $i = 1;
+                                                    foreach ($products as $value) {
+                                                       
+                                                ?>
+                                                <tr>
+                                                    <td class="text-center"><?php echo ($page+$i);?></td>
+                                                    <td><?php echo $value['product_name'];?></td>
+                                                    <td class="text-center"> 
+                                                        <img src="<?php echo base_url('assets/img/product/'.$value['image']);?>" width="80px" height="80px">
+                                                    </td>
+                                                    <td><?php echo $value['size_type'];?></td>
+                                                    <td><?php echo $value['stock_product'];?></td>
+                                                    <td><?php echo $value['price'];?></td>
+                                                    
+                                                    <td>
+                                                        <select name="status" class="form-control status-product">
+                                                            <?php $selected_stock_promo = ($value['status'] == "Stok Promo") ? "selected": "";?>
+                                                            <?php $selected_stock_baru = ($value['status'] == "Stok Baru") ? "selected": "";?>
+                                                            <option id_product="<?php echo $value['id_product'];?>" id_detail_product="<?php echo $value['id_detail_product'];?>" <?php echo $selected_stock_promo;?> value="Stok Promo">Stok Promo</option>
+                                                            <option id_product="<?php echo $value['id_product'];?>" id_detail_product="<?php echo $value['id_detail_product'];?>" <?php echo $selected_stock_baru;?> value="Stok Baru">Stok Baru</option>
+                                                        </select>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="<?php echo site_url();?>index.php/Product_controller/detail/<?php echo $value['id_product'];?>/<?php echo $value['id_detail_product'];?>" class="btn bg-navy margin" type='button'><i class="fa fa-th"> Detail</i></a> 
+                                                        <a href="<?php echo site_url();?>index.php/Product_controller/edit/<?php echo $value['id_product'];?>/<?php echo $value['id_detail_product'];?>" class="btn bg-purple margin" type='button'><i class='fa fa-edit'></i> Ubah </a>   
+                                                    </td>
+                                                </tr> 
+                                                <?php $i++; } ?>  
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div><!-- /.box-body -->
                                 <div class="box-footer clearfix">
                                     <?php echo $pagination; ?>
@@ -99,3 +108,21 @@
                     </div> 
                 </section><!-- /.content -->
             </aside><!-- /.right-side --> 
+
+
+            <script>
+                $( ".status-product" ).change(function(e) {
+                    var id_product = $(this).find('option:selected').attr("id_product");
+                    var id_detail_product = $(this).find('option:selected').attr("id_detail_product");
+                    var value = $(this).find('option:selected').val();
+                    
+                    $.ajax({
+                        type:'POST',
+                        url:'<?php echo base_url("index.php/product_controller/update_status_product");?>',
+                        data:{'id_product':id_product,'id_detail_product':id_detail_product,'value':value},
+                        success:function(result) {
+                            window.location.href = result;
+                        }
+                    });
+                });
+            </script>
