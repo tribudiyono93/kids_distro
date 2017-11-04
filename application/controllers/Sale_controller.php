@@ -133,9 +133,11 @@ class Sale_controller extends MY_Controller {
 			$this->p->update_detail_product_data($value['id_product'], $value['id_detail_product'], $data_detail_product);
 		}
 
+		redirect('index.php/sale_controller/review_transaction/'.$sale_transaction['id_sale_transaction']);
+	}
 
-		$data['sale_transaction'] = $this->s->get_sale_transaction_by_id($sale_transaction['id_sale_transaction']);
-
+	public function review_transaction($id_sale_transaction) {
+		$data['sale_transaction'] = $this->s->get_sale_transaction_by_id($id_sale_transaction);
 		$this->views('sale/proses_transaksi', $data);
 	}
 
