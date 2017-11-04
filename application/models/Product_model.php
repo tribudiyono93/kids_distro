@@ -70,6 +70,13 @@ class Product_model extends CI_Model {
 		return $data;
 	}
 
+	public function get_detail_product_by_id_product_and_id_detail_product($id_product, $id_detail_product) 
+	{ 
+		$query = $this->db->query("select pd.*, s.* from product_details pd, sizes s where pd.id_size = s.id_size and pd.id_product = '$id_product' and pd.id_detail_product = '$id_detail_product'"); 
+		$data = $query->row_array(); 
+		return $data;
+	}
+
 	public function search($keyword) 
 	{
 		$sql 		= "select p.id_product, p.product_name, p.id_brand, p.product_name, p.color, p.information, p.image, pc.product_category_name from products p join product_categories pc where p.id_product_category = pc.id_product_category and lower (p.product_name) like '" .$keyword. "%' order by p.creation_time desc ";

@@ -31,7 +31,7 @@
                                 <!-- <div class="col-md-6">
                                     
                                 </div> -->
-                                <form role="form">
+                                <form role="form" action="<?php echo base_url('index.php/sale_controller/process_transaction');?>" method="POST">
                                     <div class="box-body">
                                         <div class="row">
                                             <div class="col-md-9">
@@ -50,7 +50,7 @@
                                                         <label>Nama Customer</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input name="customer_name" type="text" class="form-control" placeholder="Enter ..."/>
+                                                        <input name="customer_name" required="required" type="text" class="form-control" placeholder="Customer Name"/>
                                                     </div>
                                                 </div>
                                                 <br /> <br />
@@ -59,7 +59,7 @@
                                                         <label>No HP</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input name="phone_number" type="text" class="form-control" placeholder="Enter ..."/>
+                                                        <input name="phone_number" required="required" type="text" class="form-control" placeholder="Phone Number"/>
                                                     </div>
                                                 </div>
                                                 <br /> <br /> 
@@ -68,7 +68,7 @@
                                                         <label>Alamat</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <textarea name="address" class="form-control" rows="3" placeholder="Deskripsi"></textarea>
+                                                        <textarea name="address" class="form-control" rows="3" placeholder="Address" required="required">.</textarea>
                                                     </div>
                                                 </div>
                                                 <br /> <br /> <br /> <br /> 
@@ -77,7 +77,7 @@
                                                         <label>Pembayaran</label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <select name="paymnet_options" class="form-control">
+                                                        <select name="payment_options" required="required" class="form-control">
                                                             <option value="Lunas">Lunas</option>
                                                             <option value="Belum Lunas">Belum Lunas</option> 
                                                         </select>
@@ -89,7 +89,7 @@
                                                         <label>Status</label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <select name="sale_options" class="form-control">
+                                                        <select name="sale_options" required="required" class="form-control">
                                                             <option value="Keep">Keep</option>
                                                             <option value="Pack">Pack</option> 
                                                             <option value="Done">Done</option> 
@@ -103,7 +103,7 @@
                                                         <label>Bank</label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <select name="id_bank" class="form-control">
+                                                        <select name="id_bank" required="required" class="form-control">
                                                             <?php foreach($banks as $value) {?>
                                                                 <option value="<?php echo $value['id_bank'];?>"><?php echo $value['bank_name'];?></option>
                                                             <?php } ?>
@@ -116,19 +116,10 @@
                                                         <label>Ongkir</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Enter ..."/>
+                                                        <input type="number" name="shipping_charges" required="required" class="form-control" placeholder="Ongkir"/>
                                                     </div>
                                                 </div>
-                                                <br /> <br />
-                                                <div class="form-group ">
-                                                    <div class="col-md-3">
-                                                        <label>Total Bayar</label>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control" placeholder="Enter ..."/>
-                                                    </div>
-                                                </div>
-                                                <br /> <br />  
+                                                <br /> <br /> 
 
                                                 <!-- GARIS -->
                                                 <div class="row">
@@ -234,13 +225,15 @@
                                                         <th class="text-center">Gambar</th>
                                                         <th class="text-center">Ukuran</th>  
                                                         <th class="text-center">Jumlah Barang</th>  
-                                                        <th class="text-center">Harga</th>  
+                                                        <th class="text-center">Harga</th>
+                                                        <th class="text-center">Sub Total</th>  
                                                         <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $i = 1;?>
-                                                    <?php foreach ($temp_transactions as $value) {?>
+                                                    <?php $i = 1; $total_amount=0;?>
+                                                    <?php foreach ($temp_transactions as $value) { 
+                                                        $total_amount = $total_amount + ($value['quantity'] * $value['price']);?>
                                                         <tr>
                                                             <td class="text-center"><?php echo $i;?></td> 
                                                             <td class="text-center"><?php echo $value['product_name'];?></td>
@@ -249,12 +242,18 @@
                                                             </td>
                                                             <td class="text-center"><?php echo $value['size_type'];?></td>
                                                             <td class="text-center"><?php echo $value['quantity'];?></td>
+                                                            <td class="text-center"><?php echo $value['price'];?></td>
                                                             <td class="text-center"><?php echo $value['quantity'] * $value['price'];?></td>
                                                             <td class="text-center">
                                                                 <a href="" id_temp_transaction="<?php echo $value['id'];?>" class="btn bg-orange margin delete-temp-transaction" type='button'><i class='fa fa-eraser'></i> Hapus </a> 
                                                             </td>
                                                         </tr>  
                                                     <?php $i++; } ?>
+                                                        <tr>
+                                                            <td colspan="6" class="text-right">Total Bayar : </td>
+                                                            <td><input type="number" name="tot_price" value="<?php echo $total_amount;?>" required="required" class="form-control" /></td>\
+                                                            <td></td>
+                                                        </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -267,7 +266,7 @@
                                         <div class="row">
                                             <div class="col-md-12"> 
                                                 <div class="col-md-12">  
-                                                    <a href="<?php echo site_url();?>index.php/Sale_Controller/proses_trans"  class="btn bg-navy pull-right">Proses Transaksi</a>
+                                                    <button class="btn bg-navy pull-right" type="submit">Proses Transaksi</button>
                                                 </div>
                                             </div>
                                         </div>

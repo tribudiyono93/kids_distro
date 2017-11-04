@@ -72,6 +72,73 @@ class Sale_controller extends MY_Controller {
 		}
 	}
 
+	public function process_transaction() {
+		$sale_transaction['id_sale_transaction'] 	= $this->input->post('id_sale_transaction');
+		$sale_transaction['id_bank'] 				= $this->input->post('id_bank');
+		$sale_transaction['customer_name'] 			= $this->input->post('customer_name');
+		$sale_transaction['phone_number'] 			= $this->input->post('phone_number');
+		$sale_transaction['address'] 				= $this->input->post('address');
+		$sale_transaction['tot_price'] 				= $this->input->post('tot_price');
+		$sale_transaction['payment_options'] 		= $this->input->post('payment_options');
+		$sale_transaction['sale_options'] 			= $this->input->post('sale_options');
+		$sale_transaction['quantity'] 				= $this->input->post('quantity');
+		$sale_transaction['shipping_charges']		= $this->input->post('shipping_charges');
+		$sale_transaction['creation_time']			= date("Y-m-d H:i:s");
+		$sale_transaction['created_by']				= $this->session->userdata('username');
+		$sale_transaction['updated_time']			= date("Y-m-d H:i:s");
+		$sale_transaction['updated_by']				= $this->session->userdata('username');
+
+		$temp_transactions = $this->s->get_temp_transaction_by_username($this->session->userdata('username'));
+
+		$detail_sale_transaction = array();
+
+		$i = 0;
+		foreach ($temp_transactions as $value) {
+			$detail_sale_transaction[$i]['id_sale_transaction'] 	= $sale_transaction['id_sale_transaction'];	
+			$detail_sale_transaction[$i]['id_product'] 				= $value['id_product'];
+			$detail_sale_transaction[$i]['sale_price'] 				= $value['price'];
+			$detail_sale_transaction[$i]['sale_quantity'] 			= $value['quantity'];
+			$detail_sale_transaction[$i]['sale_size'] 				= $value['size_type'];
+			$i++;
+		}
+
+		//save sale transaction
+		$save_sale_transaction_status = $this->s->save_sale_transaction($sale_transaction);
+		//save detail sale transaction
+		foreach ($detail_sale_transaction as $value) {
+			$data['id_sale_transaction'] 		= $value['id_sale_transaction'];
+			$data['id_product'] 				= $value['id_product'];
+			$data['sale_price'] 				= $value['sale_price'];
+			$data['sale_quantity'] 				= $value['sale_quantity'];
+			$data['sale_size'] 					= $value['sale_size'];
+			$data['creation_time']				= date("Y-m-d H:i:s");
+			$data['created_by']					= $this->session->userdata('username');
+			$data['updated_time']				= date("Y-m-d H:i:s");
+			$data['updated_by']					= $this->session->userdata('username');
+
+			$this->s->save_detail_sale_transaction($data);
+		}
+		//delete temp transaction
+		$this->s->delete_temp_transaction_by_username($this->session->userdata('username'));
+
+		//kurangin stok product
+		foreach ($temp_transactions as $value) {
+			$detail_product = $this->p->get_detail_product_by_id_product_and_id_detail_product($value['id_product'], $value['id_detail_product']);
+
+			$current_stock = $detail_product['stock_product'];
+
+			$data_detail_product['stock_product'] = $current_stock - $value['quantity'];
+
+
+			$this->p->update_detail_product_data($value['id_product'], $value['id_detail_product'], $data_detail_product);
+		}
+
+
+		$data['sale_transaction'] = $this->s->get_sale_transaction_by_id($sale_transaction['id_sale_transaction']);
+
+		$this->views('sale/proses_transaksi', $data);
+	}
+
 }
 
 /* End of file Sale_controller.php */

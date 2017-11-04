@@ -6,13 +6,15 @@
             <th class="text-center">Gambar</th>
             <th class="text-center">Ukuran</th>  
             <th class="text-center">Jumlah Barang</th>  
-            <th class="text-center">Harga</th>  
+            <th class="text-center">Harga</th>
+            <th class="text-center">Sub Total</th>  
             <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody>
-        <?php $i = 1;?>
-        <?php foreach ($temp_transactions as $value) {?>
+        <?php $i = 1; $total_amount=0;?>
+        <?php foreach ($temp_transactions as $value) {
+            $total_amount = $total_amount + ($value['quantity'] * $value['price']);?>
             <tr>
                 <td class="text-center"><?php echo $i;?></td> 
                 <td class="text-center"><?php echo $value['product_name'];?></td>
@@ -21,12 +23,18 @@
                 </td>
                 <td class="text-center"><?php echo $value['size_type'];?></td>
                 <td class="text-center"><?php echo $value['quantity'];?></td>
+                <td class="text-center"><?php echo $value['price'];?></td>
                 <td class="text-center"><?php echo $value['quantity'] * $value['price'];?></td>
                 <td class="text-center">
-                    <a href="" onclick="return confirm('Apakah anda yakin data akan di hapus?');" class="btn bg-orange margin" type='button'><i class='fa fa-eraser'></i> Hapus </a> 
+                    <a href="" class="btn bg-orange margin delete-temp-transaction" type='button'><i class='fa fa-eraser'></i> Hapus </a> 
                 </td>
             </tr>  
         <?php $i++; } ?>
+        <tr>
+            <td colspan="6" class="text-right">Total Bayar : </td>
+            <td><input type="number" name="tot_price" value="<?php echo $total_amount;?>" required="required" class="form-control" /></td>\
+            <td></td>
+        </tr>
     </tbody>
 </table>
 

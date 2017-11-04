@@ -36,7 +36,7 @@
                                                         <label>No Transaksi[S]</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                         <label type="text" required="required" class="col-md-7 col-xs-12">SALE180920170001</label>
+                                                         <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['id_sale_transaction'];?></label>
                                                     </div>
                                                 </div>
                                                 <br /> 
@@ -45,7 +45,7 @@
                                                         <label>Customer</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label type="text" required="required" class="col-md-7 col-xs-12">Siska</label>
+                                                        <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['customer_name'];?></label>
                                                     </div>
                                                 </div>
                                                 <br /> 
@@ -54,7 +54,7 @@
                                                         <label>No HP</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label type="text" required="required" class="col-md-7 col-xs-12">0812345678910</label>
+                                                        <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['phone_number'];?></label>
                                                     </div>
                                                 </div>
                                                 <br /> 
@@ -63,7 +63,7 @@
                                                         <label>Alamat</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label type="text" required="required" class="col-md-7 col-xs-12">Jakal KM 9</label>
+                                                        <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['address'];?></label>
                                                     </div>
                                                 </div>  
                                             </div>
@@ -84,7 +84,7 @@
                                                         <label>Pembayaran</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                      <label type="text" required="required" class="col-md-7 col-xs-12">Lunas</label>
+                                                      <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['payment_options'];?></label>
                                                     </div>
                                                 </div>
                                                 <br />  
@@ -93,7 +93,7 @@
                                                         <label>Status</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label type="text" required="required" class="col-md-7 col-xs-12">Keep</label>
+                                                        <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['sale_options'];?></label>
                                                     </div>
                                                 </div>
                                                 <br />  
@@ -102,7 +102,7 @@
                                                         <label>Bank</label>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label type="text" required="required" class="col-md-7 col-xs-12">BRI</label>
+                                                        <label type="text" required="required" class="col-md-7 col-xs-12"><?php echo $sale_transaction['bank_name'];?></label>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -179,7 +179,7 @@
                                                 <label>Ongkir</label>
                                             </div>
                                             <div class="col-md-6">
-                                              <label type="text" required="required" class="col-md-7 col-xs-12">Rp 10.000</label>
+                                              <label type="text" required="required" class="col-md-7 col-xs-12">Rp . <?php echo $sale_transaction['shipping_charges'];?></label>
                                           </div>
                                         </div>
                                         <br />  
@@ -190,15 +190,6 @@
                                         <div class="col-md-6">
                                             <label type="text" required="required" class="col-md-7 col-xs-12">Rp 105.000</label>
                                         </div>
-                                        </div>
-                                        <br />  
-                                        <div class="form-group ">
-                                            <div class="col-md-4">
-                                                <label>Total Bayar</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label type="text" required="required" class="col-md-7 col-xs-12">Rp 100.000</label>
-                                            </div>
                                         </div>
                                         <br />
                                         <div class="form-group ">
