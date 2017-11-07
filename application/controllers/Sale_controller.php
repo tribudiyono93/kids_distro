@@ -18,13 +18,35 @@ class Sale_controller extends MY_Controller {
 
 	public function index()
 	{
-		$this->views('sale/rekap_transaksi');
-	}
-
-
-	public function rekap_detail()
-	{
-		$this->views('sale/detail_rekap_transaksi');
+		$config['base_url']			= base_url('index.php/Sale_controller/index');
+		$config['total_rows']		= $this->s->get_total_rows();
+		$config['per_page']			= 4;
+		$config["uri_segment"] 		= 3;
+        $choice 					= $config["total_rows"] / $config["per_page"];
+        $config["num_links"] 		= floor($choice);
+        $config['full_tag_open']	= '<ul class="pagination pagination-sm no-margin pull-right">';
+		$config['full_tag_close']	= '</ul>';
+		$config['first_link'] 		= false;
+		$config['last_link'] 		= false;
+		$config['prev_link']		= '&laquo;';
+		$config['next_link']		= '&raquo;';
+		$config['prev_tag_open']	= '<li>';
+		$config['prev_tag_close']	= '</li>';
+		$config['next_tag_open']	= '<li>';
+		$config['next_tag_close']	= '</li>';
+		$config['cur_tag_open'] 	= '<li class="active"><a href="#">';
+        $config['cur_tag_close'] 	= '</a></li>';
+        $config['num_tag_open'] 	= '<li>';
+        $config['num_tag_close'] 	= '</li>';
+        $this->pagination->initialize($config);
+        $data['page'] 				= ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['pagination']			= $this->pagination->create_links();
+        $current_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+        $url = array(
+        	'previous_url' => $current_url
+        );
+		$data['sales']			 	= $this->s->get_sale($config["per_page"], $data['page']); 
+		$this->views('sale/rekap_transaksi',$data);
 	}
 
 	public function get_detail_product_by_id_product($id_product) {
@@ -139,6 +161,85 @@ class Sale_controller extends MY_Controller {
 	public function review_transaction($id_sale_transaction) {
 		$data['sale_transaction'] = $this->s->get_sale_transaction_by_id($id_sale_transaction);
 		$this->views('sale/proses_transaksi', $data);
+	}
+
+	public function update_payment_options() 
+	{
+		$id_sale_transaction 			= $this->input->post('id_sale_transaction');
+		$data['payment_options'] 		= $this->input->post('value');
+		$data['updated_time']			= date("Y-m-d H:i:s");
+		$data['updated_by']				= $this->session->userdata('username');
+		$payment_options = $this->s->update_payment_options_by_id($id_sale_transaction, $data);
+		if ($payment_options) {
+			echo $this->session->userdata('previous_url');
+		}
+	}
+
+	public function update_sale_options() 
+	{
+		$id_sale_transaction 			= $this->input->post('id_sale_transaction');
+		$data['sale_options'] 		    = $this->input->post('value');
+		$data['updated_time']			= date("Y-m-d H:i:s");
+		$data['updated_by']				= $this->session->userdata('username');
+		$sale_options = $this->s->update_sale_options_by_id($id_sale_transaction, $data);
+		if ($sale_options) {
+			echo $this->session->userdata('previous_url');
+		}
+	}
+
+	public function rekap_detail($id_sale_transaction)
+	{
+		$data['sale_transaction'] = $this->s->get_sale_transaction_by_id($id_sale_transaction);
+		$data['detail_sale_transaction'] = $this->s->getDetailSaleByIdSale($id_sale_transaction);
+		$this->views('sale/detail_rekap_transaksi',$data);
+	}
+
+	//edit tabel sale_transactions
+	public function edit_sale($id_sale_transaction)
+	{
+		$data['edit_st'] = $this->s->get_sale_by_id($id_sale_transaction); 
+		$data['banks'] = $this->b->get_all_banks();
+		$this->views('sale/ubah_transaksi',$data);
+	}
+
+	public function update() 
+	{
+		//get all data
+		$id_sale_transaction			= $this->input->post('id_sale_transaction');
+		$data['id_bank'] 				= $this->input->post('id_bank');
+		$data['customer_name'] 			= $this->input->post('customer_name');
+		$data['phone_number'] 			= $this->input->post('phone_number');
+		$data['address'] 				= $this->input->post('address');
+		$data['tot_price'] 				= $this->input->post('tot_price');
+		$data['payment_options'] 		= $this->input->post('payment_options');
+		$data['sale_options'] 			= $this->input->post('sale_options');
+		$data['quantity'] 				= $this->input->post('quantity');
+		$data['shipping_charges']		= $this->input->post('shipping_charges');
+		$data['updated_time']			= date("Y-m-d H:i:s");
+		$data['updated_by']				= $this->session->userdata('username'); 
+		$is_success = $this->s->update($id_sale_transaction, $data);
+		if ($is_success) {
+			$this->session->set_flashdata('success_msg', 'Success update data');
+			redirect('index.php/Sale_controller');
+		} else {
+			$this->session->set_flashdata('error_msg', 'Failed update data');
+			redirect('index.php/Sale_controller');
+		}
+	}
+	//edit tabel detail_sale_transactions
+	public function edit_detail_salewwww($id_sale_transaction,$id_detail_sale_transaction)
+	{
+		$data['sale_transaction'] = $this->s->get_sale_transaction_by_id($id_sale_transaction);
+		$data['detail_sale_transaction'] = $this->s->getDetailSaleByIdSale($id_sale_transaction);
+		$this->views('sale/ubah_rincian_transaksi');
+	}
+	
+	public function edit_detail_sale($id_product, $id_detail_product)
+	{
+		$data['brands'] 		= $this->b->get_all_brand(); 
+		$data['sizes']			= $this->s->get_all_size();
+		$data['sale'] = $this->s->get_sale_detail_by_id_sale_transcations_and_id_detail_sale_transactions($id_sale_transaction, $id_detail_sale_transaction);
+		$this->views('sale/ubah_rincian_transaksi', $data);
 	}
 
 }
